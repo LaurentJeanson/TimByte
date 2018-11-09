@@ -17,31 +17,20 @@ public class DeplacementPerso : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        /*var depVert = Input.GetAxis("Vertical");
+        var depVert = Input.GetAxis("Vertical");
         var depHor = Input.GetAxis("Horizontal");
 
-        float vitHor = depHor * vitesseDep;
+        float vitHor = -depHor * vitesseDep;
         float vitVert = depVert * vitesseDep;
 
-        Vector3 velY = new Vector3(0, rb.velocity.y, 0);
-        rb.velocity = new Vector3(vitHor, 0, vitVert).normalized;
-        rb.velocity += velY;*/
+        transform.position += new Vector3(vitVert, 0, vitHor) * Time.deltaTime;
 
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+        if (vitHor != 0 || vitVert != 0)
         {
-            transform.position += transform.forward * Time.deltaTime * vitesseDep;
+            anim.SetBool("Marche", true);
         }
-
-        /*Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        RaycastHit infoCollisionPerso;
-
-        if (Physics.Raycast(camRay.origin, camRay.direction, out infoCollisionPerso, 5000))
-        {
-            Vector3 pointARegarder = infoCollisionPerso.point;//(x, y, z)
-            /*gameObject.*/
-            /*transform.LookAt(pointARegarder);
-            transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
-        }*/
+        else {
+            anim.SetBool("Marche", false);
+        }
     }
 }
